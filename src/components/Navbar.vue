@@ -1,0 +1,64 @@
+<template>
+	<!-- Hero head: will stick at the top -->
+	<div class="hero-head">
+		<nav class="navbar">
+			<div class="container">
+				<div class="navbar-brand">
+					<a class="navbar-item brandname">
+						<p class="">TRAVEL EASY</p>
+					</a>
+					<span class="navbar-burger burger" data-target="navbarMenuHeroA">
+						<span></span>
+						<span></span>
+						<span></span>
+					</span>
+				</div>
+				<div id="navbarMenuHeroA" class="navbar-menu">
+					<div class="navbar-end">
+						<router-link to="/" class="navbar-item nav-item-color is-active">
+							Home
+						</router-link>
+
+						<a class="navbar-item">
+							About
+						</a>
+						<a href="" class="navbar-item">Book Travel</a>
+					</div>
+				</div>
+			</div>
+		</nav>
+	</div>
+</template>
+
+<script>
+export default {
+	name: "Navbar",
+};
+</script>
+
+<style scoped>
+.brandname p {
+	color: white;
+	font-size: 1.5rem;
+	font-weight: 700;
+}
+
+.brandname:hover {
+	color: white;
+	transform: scale(1.1);
+}
+
+.navbar-burger {
+	color: white;
+}
+
+.navbar-end > .navbar-item {
+	color: white;
+	font-size: 1.1rem;
+}
+
+.navbar-end > .navbar-item:hover {
+	color: #087fde;
+	font-size: 1.1rem;
+}
+</style>

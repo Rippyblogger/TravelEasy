@@ -1,4 +1,4 @@
-# cloudsave
+# TravelEasy
 
 ## Project setup
 ```
