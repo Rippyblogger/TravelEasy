@@ -36,7 +36,7 @@ export default {
 };
 </script>
 
-<style >
+<style scoped>
 .brandname p {
 	color: #087fde;
 	font-size: 1.5rem;
