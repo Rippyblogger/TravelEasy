@@ -58,7 +58,8 @@ export default {
 }
 
 .navbar-end > .navbar-item:hover {
-	color: #087fde;
+	background-color: #087fde;
+	color: white;
 	font-size: 1.1rem;
 }
 

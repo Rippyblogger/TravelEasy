@@ -70,6 +70,7 @@
 					<div class="control">
 						<div class="select" aria-required="">
 							<select id="country">
+								<option value="Select Country" disabled selected hidden>Select Country</option>
 								<option value="Afganistan">Afghanistan</option>
 								<option value="Albania">Albania</option>
 								<option value="Algeria">Algeria</option>
