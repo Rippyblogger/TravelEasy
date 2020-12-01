@@ -15,7 +15,7 @@
 				</div>
 				<div id="navbarMenuHeroA" class="navbar-menu">
 					<div class="navbar-end">
-						<router-link to="/" class="navbar-item nav-item-color is-active">
+						<router-link to="/" class="navbar-item nav-item-color">
 							Home
 						</router-link>
 
@@ -61,4 +61,8 @@ export default {
 	color: #087fde;
 	font-size: 1.1rem;
 }
+
+
+
+
 </style>
