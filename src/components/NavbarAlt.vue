@@ -4,24 +4,32 @@
 		<nav class="navbar">
 			<div class="container">
 				<div class="navbar-brand">
-					<a class="navbar-item brandname">
+					<router-link to="/" class="navbar-item brandname">
 						<p class="">TRAVEL EASY</p>
-					</a>
-					<span class="navbar-burger burger" data-target="navbarMenuHeroA">
+					</router-link>
+					<span
+						class="navbar-burger burger"
+						data-target="navbarMenuHeroA"
+						@click="showNav = !showNav"
+					>
 						<span></span>
 						<span></span>
 						<span></span>
 					</span>
 				</div>
-				<div id="navbarMenuHeroA" class="navbar-menu">
+				<div
+					id="navbarMenuHeroA"
+					:class="{ 'navbar-menu': showClass, 'is-active': showNav }"
+				>
 					<div class="navbar-end">
 						<router-link to="/" class="navbar-item nav-item-color">
 							Home
 						</router-link>
 
-						<a class="navbar-item">
+						<router-link to="/about" class="navbar-item nav-item-color">
 							About
-						</a>
+						</router-link>
+
 						<a href="" class="navbar-item">Book Travel</a>
 					</div>
 				</div>
@@ -33,6 +41,12 @@
 <script>
 export default {
 	name: "NavbarAlt",
+	data: function() {
+		return {
+			showNav: false,
+			showClass: true,
+		};
+	},
 };
 </script>
 
@@ -62,8 +76,4 @@ export default {
 	color: white;
 	font-size: 1.1rem;
 }
-
-
-
-
 </style>
