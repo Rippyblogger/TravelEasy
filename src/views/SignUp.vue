@@ -5,16 +5,31 @@
 		</div>
 
 		<div class="columns">
-			<div class="column centerit">
+			<form
+				@submit.prevent="formvalidate"
+				id="signupform"
+				class="column centerit"
+			>
+				<div>
+					<p
+						class="errorcolour"
+						id="error"
+						v-for="(item, index) in errorList"
+						:key="index"
+					>
+						{{ item.message }}
+					</p>
+				</div>
+
 				<div class="field">
 					<label class="label">First Name</label>
 					<div class="control">
 						<input
-							required
 							id="firstname"
 							class="input"
 							type="text"
-							placeholder="e.g Adeboye"
+							placeholder="e.g John"
+							v-model="firstname"
 						/>
 					</div>
 				</div>
@@ -23,11 +38,11 @@
 					<label class="label">Last Name</label>
 					<div class="control">
 						<input
-							required
 							id="lastname"
 							class="input"
 							type="text"
-							placeholder="e.g Adeotan"
+							placeholder="e.g Schmidt"
+							v-model="lastname"
 						/>
 					</div>
 				</div>
@@ -36,11 +51,11 @@
 					<label class="label">Username</label>
 					<div class="control">
 						<input
-							required
-							id="Username"
+							id="username"
 							class="input"
 							type="text"
-							placeholder="e.g boyeadeotan"
+							placeholder="e.g johnschmidt"
+							v-model="username"
 						/>
 					</div>
 				</div>
@@ -49,11 +64,26 @@
 					<label class="label">Email</label>
 					<div class="control">
 						<input
-							required
 							id="email"
 							class="input"
 							type="email"
-							placeholder="e.g. boyeadeotan@gmail.com"
+							placeholder="e.g. johnschmidt@outlook.com"
+							v-model="email"
+						/>
+					</div>
+				</div>
+
+				<div class="field">
+					<label class="label">Telephone</label>
+					<div class="control">
+						<input
+							id="telephone"
+							class="input"
+							type="tel"
+							placeholder="e.g. xxx-xxx-xxxx"
+							minlength="11"
+							maxlength="13"
+							v-model="telephone"
 						/>
 					</div>
 				</div>
@@ -61,7 +91,12 @@
 				<div class="field">
 					<label class="label">Date Of Birth</label>
 					<div class="control">
-						<input id="dateofbirth" class="input" type="date" required />
+						<input
+							id="dateofbirth"
+							class="input"
+							type="date"
+							v-model="dateofbirth"
+						/>
 					</div>
 				</div>
 
@@ -70,7 +105,9 @@
 					<div class="control">
 						<div class="select" aria-required="">
 							<select id="country">
-								<option value="Select Country" disabled selected hidden>Select Country</option>
+								<option value="Select Country" disabled selected hidden
+									>Select Country</option
+								>
 								<option value="Afganistan">Afghanistan</option>
 								<option value="Albania">Albania</option>
 								<option value="Algeria">Algeria</option>
@@ -345,9 +382,11 @@
 				</div>
 
 				<div class="control">
-					<button id="submit" class="button">Submit</button>
+					<button id="submit" class="button" required>
+						Submit
+					</button>
 				</div>
-			</div>
+			</form>
 
 			<div class="column">
 				<figure class="image">
@@ -364,6 +403,35 @@ export default {
 	name: "SignUp",
 	components: {
 		NavbarAlt,
+	},
+	data: function() {
+		return {
+			firstname: "",
+			lastname: "",
+			username: "",
+			email: "",
+			telephone: "",
+			dateofbirth: "",
+			id: 0,
+			errorList: [],
+		};
+	},
+	methods: {
+		formvalidate: function() {
+			let formError = document.getElementById("error");
+			this.errorList.length = 0;
+			if (this.firstname < 1 || this.lastname < 1) {
+				this.id++;
+				this.errorList.push({
+					message: "Firstname or lastname must be greater than one character",
+				});
+			}else{
+				this.errorList.length= 0;
+				formError.innerText ="";
+				console.log("Submitted");
+			}
+			
+		},
 	},
 };
 </script>
@@ -393,5 +461,17 @@ button {
 
 .field {
 	width: 100%;
+}
+
+input:invalid {
+	border: 1px solid red;
+}
+
+input:valid {
+	border: 1px solid #087fde;
+}
+
+.errorcolour {
+	color: red;
 }
 </style>
