@@ -61,6 +61,19 @@
 				</div>
 
 				<div class="field">
+					<label class="label">Password</label>
+					<div class="control">
+						<input
+							id="password"
+							class="input"
+							type="password"
+							placeholder=""
+							v-model="password"
+						/>
+					</div>
+				</div>
+
+				<div class="field">
 					<label class="label">Email</label>
 					<div class="control">
 						<input
@@ -409,26 +422,43 @@ export default {
 			firstname: "",
 			lastname: "",
 			username: "",
+			password: "",
 			email: "",
 			telephone: "",
 			dateofbirth: "",
-			id: 0,
 			errorList: [],
 		};
 	},
 	methods: {
 		formvalidate: function() {
-			let formError = document.getElementById("error");
+			// let formError = document.getElementById("error");
+			let passRegex = "^([a-zA-Z0-9@*#]{8,15})$" //eslint-disable-line
+			let emailRegex = "^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+(?:[a-zA-Z]{2}|aero|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel)$" //eslint-disable-line
+			let telRegex = "^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$" //eslint-disable-line
+			let today = Date.now();
+
+			console.log(today);
 			this.errorList.length = 0;
 			if (this.firstname < 1 || this.lastname < 1) {
-				this.id++;
+				
 				this.errorList.push({
-					message: "Firstname or lastname must be greater than one character",
+					message: "Firstname or lastname must be greater than one character"
 				});
-			}else{
-				this.errorList.length= 0;
-				formError.innerText ="";
-				console.log("Submitted");
+			}
+			else if(Boolean(this.password.match(passRegex)) == false){
+				this.errorList.push({
+					message: "Your chosen password must contain a minimum of eight characters, at least one uppercase letter, one lowercase letter, one number and one special character"
+				});
+			}
+			else if(Boolean(this.email.match(emailRegex)) == false){
+				this.errorList.push({
+					message: "Please enter a valid email address"
+				});
+			}
+			else if(Boolean(this.telephone.match(telRegex)) == false){
+				this.errorList.push({
+					message: "Please enter a valid phone number"
+				});
 			}
 			
 		},
