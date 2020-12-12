@@ -1,6 +1,6 @@
 <template>
 	<div id="app" class="app">
-		<div id="nav">
+		<div>
 			<router-view />
 		</div>
 	</div>
@@ -12,6 +12,8 @@
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
+	margin: 0;
+	padding: 0;
 }
 </style>
 

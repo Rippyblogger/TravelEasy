@@ -11,7 +11,6 @@ import HeroBody from "@/components/HeroBody.vue";
 export default {
 	name: "Home",
 	components: {
-		// HelloWorld,
 		HeroBody,
 	},
 };

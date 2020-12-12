@@ -20,20 +20,34 @@
 					<ul>
 						<li><a>Contact</a></li>
 						<li><router-link to="/SignUp">Sign Up</router-link></li>
-						<li><a>Login</a></li>
+						<li><a @click="showModal=!showModal">Log In</a></li>
 					</ul>
 				</div>
 			</nav>
 		</div>
+		<Login :modal-show="showModal" @modal-close="closeModal"/>
 	</section>
 </template>
 
 <script>
 import Navbar from "@/components/Navbar.vue";
+import Login from "@/components/Login.vue";
+
 export default {
 	name: "HeroBody",
 	components: {
 		Navbar,
+		Login,
+	},
+	data: function(){
+		return{
+			showModal: false
+		}
+	},
+	methods: {
+		closeModal: function(){
+			this.showModal = !this.showModal
+		}
 	},
 };
 </script>
@@ -43,8 +57,6 @@ export default {
 	@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;1,300&display=swap");
 	font-family: "Lato", sans-serif;
 }
-
-
 
 /* Hero-text */
 .title {

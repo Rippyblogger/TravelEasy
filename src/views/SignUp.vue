@@ -395,7 +395,7 @@
 				</div>
 
 				<div class="control">
-					<button id="submit" class="button" required>
+					<button id="submit" class="button">
 						Submit
 					</button>
 				</div>
