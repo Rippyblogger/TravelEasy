@@ -25,7 +25,7 @@
 				</div>
 			</nav>
 		</div>
-		<Login :modal-show="showModal" @modal-close="closeModal"/>
+		<Login :modal-show="showModal" @modal-close="closeModal()"/>
 	</section>
 </template>
 
@@ -56,6 +56,13 @@ export default {
 * {
 	@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;1,300&display=swap");
 	font-family: "Lato", sans-serif;
+}
+
+.home {
+	background-image: url(../assets/seaview.jpg);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 /* Hero-text */

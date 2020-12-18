@@ -3,9 +3,24 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import SignUp from "../views/SignUp.vue";
 import About from '../views/About.vue';
+import BookTrip from "../views/BookTrip.vue";
+import axios from "axios";
+
+Vue.use(axios);
+
+axios.defaults.baseURL = "https://ivory-nectar-234618-default-rtdb.firebaseio.com";
+
+Vue.use(VueRouter);
+
+/* const store = createStore({
+	state() {
+		return {
+			test: "works",
+		};
+	},
+}); */
 
 
-Vue.use(VueRouter)
 
 const routes = [
 	{
@@ -30,6 +45,11 @@ const routes = [
 		path: "/SignUp",
 		name: "SignUp",
 		component: SignUp,
+	},
+	{
+		path: "/BookTrip",
+		name: "BookTrip",
+		component: BookTrip,
 	},
 ];
 

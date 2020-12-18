@@ -30,7 +30,9 @@
 							About
 						</router-link>
 
-						<a href="" class="navbar-item">Book Travel</a>
+						<router-link to="/BookTrip" class="navbar-item nav-item-color">
+							Book Trip
+						</router-link>
 					</div>
 				</div>
 			</div>

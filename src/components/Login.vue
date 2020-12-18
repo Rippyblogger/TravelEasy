@@ -12,9 +12,11 @@
 					<div class="control">
 						<input
 							id="username"
+							v-model="username"
 							class="input"
 							type="text"
 							placeholder=""
+							autocomplete="username"
 							required
 						/>
 					</div>
@@ -25,16 +27,18 @@
 					<div class="control">
 						<input
 							id="password"
+							v-model="password"
 							class="input"
 							type="password"
 							placeholder=""
+							autocomplete="password"
 							required
 						/>
 					</div>
 				</div>
 
 				<div class="control">
-					<button id="submit" class="button">
+					<button id="submit" class="button" @click="checkAuth()">
 						Submit
 					</button>
 				</div>
@@ -45,19 +49,33 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
 	props: ["modalShow"],
 	name: "Login",
 	data: function() {
 		return {
 			classActive: true,
+			username: "",
+			password: "",
 		};
 	},
 	methods:{
 		closeSignUp: function(){
 			this.$emit('modal-close')
+		},
+
+		checkAuth: function(){
+			axios.get('/users.json')
+			.then (res => console.log(res))
+			.catch(error => console.log(error))
+			
+			
+
 		}
 	},
+
 };
 </script>
 

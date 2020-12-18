@@ -30,6 +30,8 @@
 							type="text"
 							placeholder="e.g John"
 							v-model="firstname"
+							autocomplete="firstname"
+							
 						/>
 					</div>
 				</div>
@@ -43,6 +45,8 @@
 							type="text"
 							placeholder="e.g Schmidt"
 							v-model="lastname"
+							autocomplete="lastname"
+							
 						/>
 					</div>
 				</div>
@@ -56,6 +60,8 @@
 							type="text"
 							placeholder="e.g johnschmidt"
 							v-model="username"
+							autocomplete="username"
+							
 						/>
 					</div>
 				</div>
@@ -67,8 +73,9 @@
 							id="password"
 							class="input"
 							type="password"
-							placeholder=""
 							v-model="password"
+							autocomplete="password"
+							
 						/>
 					</div>
 				</div>
@@ -82,6 +89,7 @@
 							type="email"
 							placeholder="e.g. johnschmidt@outlook.com"
 							v-model="email"
+							autocomplete="email"
 						/>
 					</div>
 				</div>
@@ -97,6 +105,8 @@
 							minlength="11"
 							maxlength="13"
 							v-model="telephone"
+							autocomplete="telephone"
+							
 						/>
 					</div>
 				</div>
@@ -395,7 +405,7 @@
 				</div>
 
 				<div class="control">
-					<button id="submit" class="button">
+					<button id="submit" class="button" @click="formSubmit()">
 						Submit
 					</button>
 				</div>
@@ -412,6 +422,8 @@
 
 <script>
 import NavbarAlt from "@/components/NavbarAlt.vue";
+import axios from "axios";
+
 export default {
 	name: "SignUp",
 	components: {
@@ -431,36 +443,48 @@ export default {
 	},
 	methods: {
 		formvalidate: function() {
-			// let formError = document.getElementById("error");
-			let passRegex = "^([a-zA-Z0-9@*#]{8,15})$" //eslint-disable-line
-			let emailRegex = "^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+(?:[a-zA-Z]{2}|aero|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel)$" //eslint-disable-line
-			let telRegex = "^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$" //eslint-disable-line
-			let today = Date.now();
-
-			console.log(today);
+			let emailRegex =
+				"^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+(?:[a-zA-Z]{2}|aero|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel)$"; //eslint-disable-line
+			let telRegex = "^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$"; //eslint-disable-line
 			this.errorList.length = 0;
 			if (this.firstname < 1 || this.lastname < 1) {
-				
 				this.errorList.push({
-					message: "Firstname or lastname must be greater than one character"
+					message: "Firstname or lastname must be greater than one character",
+				});
+			} else if (Boolean(this.password < 8) == false) {
+				this.errorList.push({
+					message:
+						"Your chosen password must contain a minimum of eight characters",
+				});
+			} else if (Boolean(this.email.match(emailRegex)) == false) {
+				this.errorList.push({
+					message: "Please enter a valid email address",
+				});
+			} else if (Boolean(this.telephone.match(telRegex)) == false) {
+				this.errorList.push({
+					message: "Please enter a valid phone number",
 				});
 			}
-			else if(Boolean(this.password.match(passRegex)) == false){
-				this.errorList.push({
-					message: "Your chosen password must contain a minimum of eight characters, at least one uppercase letter, one lowercase letter, one number and one special character"
-				});
-			}
-			else if(Boolean(this.email.match(emailRegex)) == false){
-				this.errorList.push({
-					message: "Please enter a valid email address"
-				});
-			}
-			else if(Boolean(this.telephone.match(telRegex)) == false){
-				this.errorList.push({
-					message: "Please enter a valid phone number"
-				});
-			}
-			
+		},
+
+		formSubmit: function() {
+			const formData = {
+				firstname: this.firstname,
+				lastname: this.lastname,
+				username: this.username,
+				password: this.password,
+				email: this.email,
+				telephone: this.telephone,
+				dateofbirth: this.dateofbirth,
+			};
+
+			axios
+				.post(
+					"https://ivory-nectar-234618-default-rtdb.firebaseio.com/users.json",
+					formData
+				)
+				.then(console.log("Submitted"))
+				.catch((error) => console.log(error));
 		},
 	},
 };
