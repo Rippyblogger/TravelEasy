@@ -1,7 +1,7 @@
 # TravelEasy
 
 Link
-#https://relaxed-bassi-2edbce.netlify.app/
+ https://relaxed-bassi-2edbce.netlify.app/
 
 
 ## Project setup
